@@ -51,3 +51,5 @@ def options(option, app)
     puts 'Please choose a number between 1 and 7'
   end
 end
+
+main
