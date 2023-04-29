@@ -1,5 +1,5 @@
 require_relative 'person'
-require_relative 'decorator'
+require_relative 'base_decorator'
 require_relative 'book'
 require_relative 'rental'
 require_relative 'teacher'
@@ -7,55 +7,55 @@ require_relative 'student'
 require_relative 'classroom'
 
 class App
-   attr_accessor :people, :rentals, :books
+  attr_accessor :people, :rentals, :books
 
-    def initialize
-        @people = []
-        @books = []
-        @rentals = []
+  def initialize
+    @people = []
+    @books = []
+    @rentals = []
+  end
+
+  # Create book list
+  def book_list
+    if @books.empty?
+      puts 'There are no books in the list'
+    else
+      @books.each_with_index do |book, index|
+        puts "#{index} - Title: #{book.title.capitalize}, Author: #{book.author.capitalize}"
+      end
     end
+  end
 
-    # Create book list
-    def book_list
-        if @books.empty?
-            puts 'There are no books in the list'
-        else
-            @books.each_with_index do |book, index|
-                puts "#{index} - Title: #{book.title.capitalize}, Author: #{book.author.capitalize}"
-    end
-
-   #create people list
-
+  # Create people list
   def people_list
     if @people.empty?
-        puts 'There are no people in the list'
+      puts 'There are no people in the list'
     else
-        @people.each_with_index do |person, index|
-            if person.instance_of?(Teacher)
-                puts "#{index} -[Teacher] Name. #{person.name}, ID: #{person.id}, Age: #{person.age}"
-            elsif person.instance_of?(Student)
-               puts "#{index} -[Student] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"     
+      @people.each_with_index do |person, index|
+        if person.instance_of?(Teacher)
+          puts "#{index} -[Teacher] Name. #{person.name}, ID: #{person.id}, Age: #{person.age}"
+        elsif person.instance_of?(Student)
+          puts "#{index} -[Student] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+        end
+      end
+    end
   end
-end
 
-end
-
-# Create new person
-def create_person
+  # Create new person
+  def create_person
     puts 'Do you want to create a student (1) or a teacher (2) [Input the number]:'
     number = gets.chomp.to_i
     if number == 1
-        create_student
+      create_student
     elsif number == 2
-        create_teacher
+      create_teacher
     else
-        puts 'Invalid input'
+      puts 'Invalid input'
     end
-end
+  end
 
-# create new student
-
-def create_person
+  # create new student
+  def create_student
     puts 'Name: '
     name = gets.chomp
     puts 'Age: '
@@ -67,10 +67,10 @@ def create_person
     @people.push Student.new(age, parent_permission, name)
 
     puts 'Student created successfully'
-end
+  end
 
-#Create new book
-def create_book
+  # Create new book
+  def create_book
     puts 'Title'
     title = gets.chomp
     puts 'Author: '
@@ -79,38 +79,22 @@ def create_book
 
     @books.push(book)
     puts 'Book created successfully'
-end
+  end
 
-#Create new rental
+  # Create new rental
+  def create_rental
+    puts 'Select a book index from the following list by number: '
+    book_list
+    book_index = gets.chomp.to_i
+    rented_book = @books[book_index]
+    puts 'Select a person index from the following list by number (not id): '
+    people_list
+    person_index = gets.chomp.to_i
+    renter = @people[person_index]
+    puts 'Enter a date as (YYYY-MM-DD):'
+    date = gets.chomp
 
-def create_rental
-  puts 'Select a book index from the following list by number: '
-  book_list
-  book_index = gets.chomp.to_i
-  rented_book = @book[book_index]
-  puts 'Select a person index from the following list by number (not id): '
-  people_list
-  person_index = gets.chomp.to_i
-  renter = @people[person_index]
-  puts 'Enter a date as (YYYY-MM-DD):'
-  date = gets.chomp
-
-  @rentals.push Rental.new(date, rented_book, renter)
-  puts 'Rental created successfully'
-end
-
-#Check rental list
-
-def rental_list
- people_list
- puts 'Enter ID of person: '
- renter_id = gets.chomp.to_i
-
- renter = @people.Select { |person| person.id == renter_id}
- if @rentals.empty?
-    puts 'Rental is empty'
- else
-    renter.first.rentals.map do |rental|
-        puts "Rental date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}"
-end
+    @rentals.push Rental.new(date, rented_book, renter)
+    puts 'Rental created successfully'
+  end
 end
