@@ -109,17 +109,17 @@ class App
     puts 'Rental created successfully'
   end
 
-  def rental_list    
-    people_list    
-    puts 'Enter ID of person: '    
+  def rental_list
+    people_list
+    puts 'Enter ID of person: '
     renter_id = gets.chomp.to_i
-    renter = @people.select { |person| person.id == renter_id }    
-    if @rentals.empty?     
-       puts 'Rental is empty'   
-     else      
-      renter.first.rentals.map do |rental|       
-       puts "Rental date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}"      
-      end    
-    end  
+    renter = @people.select { |person| person.id == renter_id }
+    if @rentals.empty?
+      puts 'Rental is empty'
+    else
+      renter.first.rentals.map do |rental|
+        puts "Rental date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}"
+      end
+    end
   end
 end
