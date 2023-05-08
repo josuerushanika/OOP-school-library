@@ -28,21 +28,14 @@ class App
 
   # Create people list
   def people_list
-    if @people.empty?
-      puts 'There are no people in the list'
-    else
-      @people.each_with_index do |person, index|
-        if person.instance_of?(Teacher)
-          puts "#{index} -[Teacher] Name. #{person.name}, ID: #{person.id}, Age: #{person.age}"
-        elsif person.instance_of?(Student)
-          puts "#{index} -[Student] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-        end
-      end
+    puts 'There are no people in the list' if @people.empty?
+    @people.each_with_index do |person, index|
+      puts "#{index} - [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
   end
 
   # Create new person
-    def create_person
+  def create_person
     puts 'Do you want to create a student (1) or a teacher (2) [Input the number]: '
     number = gets.chomp.to_i
     puts 'Name: '
@@ -59,7 +52,7 @@ class App
   end
 
   # create new student
-   def create_student(name, age)
+  def create_student(name, age)
     puts 'Has parent permission? [Y/N]'
     parent_permission = gets.chomp.upcase == 'Y'
 
@@ -67,7 +60,7 @@ class App
     puts 'Student created successfully'
   end
 
- def create_teacher(name, age)
+  def create_teacher(name, age)
     puts 'Specialization: '
     specialization = gets.chomp
 
