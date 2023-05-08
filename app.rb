@@ -48,6 +48,23 @@ class App
     end
   end
 
+  # Create new student
+  def create_student(name, age)
+    puts 'Has parent permission? [Y/N]'
+    parent_permission = gets.chomp.upcase == 'Y'
+
+    @people.push Student.new(age, parent_permission, name)
+    puts 'Student created successfully'
+  end
+
+  # Create new teacher
+  def create_teacher(name, age)
+    puts 'Specialization: '
+    specialization = gets.chomp
+
+    @people.push Teacher.new(name, age, specialization)
+    puts 'Teacher created successfully'
+  end
 
   # Create new book
   def create_book
