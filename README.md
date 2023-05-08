@@ -27,7 +27,6 @@
 **School Library App** is an app designed with Ruby where you can add teachers, students, books and see books' borrowing records.
 
 ## 🛠 Built With <a name="built-with"></a>
-
 ### Tech Stack <a name="tech-stack"></a>
 
 <details>
