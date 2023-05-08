@@ -42,40 +42,35 @@ class App
   end
 
   # Create new person
-  def create_person
-    puts 'Do you want to create a student (1) or a teacher (2) [Input the number]:'
+    def create_person
+    puts 'Do you want to create a student (1) or a teacher (2) [Input the number]: '
     number = gets.chomp.to_i
+    puts 'Name: '
+    name = gets.chomp
+    puts 'Age: '
+    age = gets.chomp.to_i
     if number == 1
-      create_student
+      create_student(name, age)
     elsif number == 2
-      create_teacher
+      create_teacher(name, age)
     else
       puts 'Invalid input'
     end
   end
 
   # create new student
-  def create_student
-    puts 'Name: '
-    name = gets.chomp
-    puts 'Age: '
-    age = gets.chomp.to_i
+   def create_student(name, age)
     puts 'Has parent permission? [Y/N]'
-    permission = gets.chomp.upcase
-    parent_permission = permission == 'Y'
+    parent_permission = gets.chomp.upcase == 'Y'
 
     @people.push Student.new(age, parent_permission, name)
-
     puts 'Student created successfully'
   end
 
-  def create_teacher
-    puts 'Name: '
-    name = gets.chomp
-    puts 'Age: '
-    age = gets.chomp.to_i
+ def create_teacher(name, age)
     puts 'Specialization: '
     specialization = gets.chomp
+
     @people.push Teacher.new(name, age, specialization)
     puts 'Teacher created successfully'
   end
