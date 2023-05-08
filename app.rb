@@ -1,10 +1,10 @@
 require_relative 'person'
-require_relative 'base_decorator'
-require_relative 'book'
-require_relative 'rental'
 require_relative 'teacher'
 require_relative 'student'
 require_relative 'classroom'
+require_relative 'nameable'
+require_relative 'book'
+require_relative 'rental'
 
 class App
   attr_accessor :people, :rentals, :books
@@ -17,12 +17,9 @@ class App
 
   # Create book list
   def book_list
-    if @books.empty?
-      puts 'There are no books in the list'
-    else
-      @books.each_with_index do |book, index|
-        puts "#{index} - Title: #{book.title.capitalize}, Author: #{book.author.capitalize}"
-      end
+    puts 'There are no books in the list' if @books.empty?
+    @books.each_with_index do |book, index|
+      puts "#{index} - Title: #{book.title.capitalize}, Author: #{book.author.capitalize}"
     end
   end
 
@@ -51,56 +48,48 @@ class App
     end
   end
 
-  # create new student
-  def create_student(name, age)
-    puts 'Has parent permission? [Y/N]'
-    parent_permission = gets.chomp.upcase == 'Y'
-
-    @people.push Student.new(age, parent_permission, name)
-    puts 'Student created successfully'
-  end
-
-  def create_teacher(name, age)
-    puts 'Specialization: '
-    specialization = gets.chomp
-
-    @people.push Teacher.new(name, age, specialization)
-    puts 'Teacher created successfully'
-  end
 
   # Create new book
   def create_book
-    puts 'Title'
+    puts 'Title: '
     title = gets.chomp
     puts 'Author: '
     author = gets.chomp
-    book = Book.new(title, author)
 
-    @books.push(book)
+    @books.push Book.new(title, author)
     puts 'Book created successfully'
   end
 
   # Create new rental
-  def create_rental
-    puts 'Select a book index from the following list by number: '
+  def select_book
     book_list
+    puts 'Select a book index from the above list by number: '
     book_index = gets.chomp.to_i
-    rented_book = @books[book_index]
-    puts 'Select a person index from the following list by number (not id): '
-    people_list
-    person_index = gets.chomp.to_i
-    renter = @people[person_index]
-    puts 'Enter a date as (YYYY-MM-DD):'
-    date = gets.chomp
+    @books[book_index]
+  end
 
+  def select_person
+    people_list
+    puts 'Select a person index from the above list by number: '
+    person_index = gets.chomp.to_i
+    @people[person_index]
+  end
+
+  def create_rental
+    rented_book = select_book
+    renter = select_person
+    puts 'Enter a date as (YYYY-MM-DD): '
+    date = gets.chomp
     @rentals.push Rental.new(date, rented_book, renter)
     puts 'Rental created successfully'
   end
 
+  # Check rental list
   def rental_list
     people_list
     puts 'Enter ID of person: '
     renter_id = gets.chomp.to_i
+
     renter = @people.select { |person| person.id == renter_id }
     if @rentals.empty?
       puts 'Rental is empty'
