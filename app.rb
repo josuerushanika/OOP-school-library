@@ -16,15 +16,14 @@ class App
     @rentals = read_data('./data/rentals.json')
   end
 
-   # Create book list
-   def book_list
+  # Create book list
+  def book_list
     @books = read_data('./data/books.json')
     puts 'There are no books in the list' if @books.empty?
     @books.each_with_index do |book, index|
       puts "#{index} - Title: #{book['title']}, Author: #{book['author']}"
     end
   end
-  
 
   # Create people list
   def people_list
