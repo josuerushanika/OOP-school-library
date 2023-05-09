@@ -16,14 +16,15 @@ class App
     @rentals = read_data('./data/rentals.json')
   end
 
-  # Create book list
-  def book_list
+   # Create book list
+   def book_list
     @books = read_data('./data/books.json')
     puts 'There are no books in the list' if @books.empty?
     @books.each_with_index do |book, index|
-      puts "#{index} - Title: #{book['title'].capitalize}, Author: #{book['author'].capitalize}"
+      puts "#{index} - Title: #{book['title']}, Author: #{book['author']}"
     end
   end
+  
 
   # Create people list
   def people_list
@@ -77,13 +78,12 @@ class App
     title = gets.chomp
     puts 'Author: '
     author = gets.chomp
-  
+
     book = Book.new(title, author)
     @books << book
     write_data(@books, './data/books.json')
     puts 'Book created successfully'
   end
-  
 
   # Create new rental
   def select_book
@@ -142,4 +142,3 @@ class App
     rental['person'] && rental['person']['id'] == renter_id && rental['book']
   end
 end
-

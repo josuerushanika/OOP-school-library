@@ -1,3 +1,5 @@
+require_relative 'person'
+
 class Student < Person
   attr_accessor :classroom
 
@@ -20,7 +22,7 @@ class Student < Person
       name: @name,
       age: @age,
       parent_permission: @parent_permission,
-      rentals: @rentals.map(&:to_h),
+      rentals: @rentals,
       classroom: @classroom.to_h
     }
   end

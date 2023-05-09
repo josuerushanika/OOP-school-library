@@ -1,5 +1,4 @@
 require_relative './person'
-require_relative './person'
 
 class Teacher < Person
   attr_accessor :specialization
@@ -19,7 +18,7 @@ class Teacher < Person
       name: @name,
       age: @age,
       parent_permission: @parent_permission,
-      rentals: @rentals.map(&:to_h),
+      rentals: @rentals,
       specialization: @specialization
     }
   end

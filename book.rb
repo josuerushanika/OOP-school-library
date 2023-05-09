@@ -17,10 +17,7 @@ class Book
     {
       title: @title,
       author: @author,
-      rentals: @rentals.map(&:to_h)
+      rentals: @rentals
     }
   end
 end
-
-
-
