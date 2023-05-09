@@ -72,7 +72,17 @@ class App
   end
 
   # Create new book
-
+  def create_book
+    puts 'Title: '
+    title = gets.chomp
+    puts 'Author: '
+    author = gets.chomp
+  
+    book = Book.new(title, author)
+    @books << book
+    write_data(@books, './data/books.json')
+    puts 'Book created successfully'
+  end
   
 
   # Create new rental
