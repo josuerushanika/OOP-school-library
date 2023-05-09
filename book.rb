@@ -12,6 +12,7 @@ class Book
   def add_rental(person, date)
     Rental.new(date, self, person)
   end
+
   def to_h
     {
       title: @title,
@@ -20,4 +21,6 @@ class Book
     }
   end
 end
+
+
 
