@@ -10,13 +10,18 @@ require_relative './data/data_preserve'
 class App
   attr_accessor :people, :rentals, :books
 
+  def initialize
+    @people = read_data('./data/people.json')
+    @books = read_data('./data/books.json')
+    @rentals = read_data('./data/rentals.json')
+  end
 
   # Create book list
   def book_list
-    @book = read_data('./data/books.json')
+    @books = read_data('./data/books.json')
     puts 'There are no books in the list' if @books.empty?
     @books.each_with_index do |book, index|
-      puts "#{index} - Title: #{book.title.capitalize}, Author: #{book.author.capitalize}"
+      puts "#{index} - Title: #{book['title'].capitalize}, Author: #{book['author'].capitalize}"
     end
   end
 
@@ -25,7 +30,7 @@ class App
     @people = read_data('./data/people.json')
     puts 'There are no people in the list' if @people.empty?
     @people.each_with_index do |person, index|
-      puts "#{index} - [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      puts "#{index} - #{person['class']} Name: #{person['name']}, ID: #{person['id']}, Age: #{person['age']}"
     end
   end
 
@@ -98,25 +103,41 @@ class App
     renter = select_person
     puts 'Enter a date as (YYYY-MM-DD): '
     date = gets.chomp
+
     @rentals.push Rental.new(date, rented_book, renter)
     write_data(@rentals, './data/rentals.json')
     puts 'Rental created successfully'
   end
 
-  # Check rental list
   def rental_list
     @rentals = read_data('./data/rentals.json') || []
     people_list
     puts 'Enter ID of person: '
     renter_id = gets.chomp.to_i
 
-    renter = @people.select { |person| person.id == renter_id }
-    if @rentals.empty?
+    if rentals_empty?
       puts 'Rental is empty'
     else
-      renter.first.rentals.map do |rental|
-        puts "Rental date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}"
+      rentals_for_person = @rentals.select do |rental|
+        rental_for_person?(rental, renter_id)
+      end
+
+      if rentals_for_person.empty?
+        puts 'No rentals found for the given person'
+      else
+        rentals_for_person.each do |rental|
+          puts "Rental date: #{rental['date']}, Book: #{rental['book']['title']} by #{rental['book']['author']}"
+        end
       end
     end
   end
+
+  def rentals_empty?
+    @rentals.nil? || @rentals.empty?
+  end
+
+  def rental_for_person?(rental, renter_id)
+    rental['person'] && rental['person']['id'] == renter_id && rental['book']
+  end
 end
+
