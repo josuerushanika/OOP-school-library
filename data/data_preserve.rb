@@ -11,7 +11,12 @@ def read_data(filename)
   return [] unless File.exist?(filename) && File.size(filename) != 0
 
   json_data = File.read(filename)
-  data = JSON.parse(json_data)
-  data.map { |obj| obj.transform_keys(&:to_sym) }
+  data = JSON.parse(json_data, symbolize_names: true)
+  data.map do |obj|
+    if obj.is_a?(Hash)
+      obj.transform_keys(&:to_sym)
+    else
+      obj
+    end
+  end
 end
-
