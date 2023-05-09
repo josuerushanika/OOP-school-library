@@ -1,0 +1,8 @@
+[
+  "{:id=>82, :name=>\"ee\", :age=>67, :parent_permission=>true, :rentals=>[], :classroom=>{}}",
+  "{:id=>501, :name=>\"uu\", :age=>88, :parent_permission=>true, :rentals=>[], :classroom=>{}}",
+  "#<Student:0x000055b712e1c7f0>",
+  "#<Student:0x000055b712e07508>",
+  "#<Student:0x000055b712dfb578>",
+  "#<Teacher:0x000055b712dee238>"
+]
