@@ -1,0 +1,76 @@
+[
+  {
+    "id": 174,
+    "name": "josue",
+    "age": 12,
+    "parent_permission": true,
+    "rentals": [
+
+    ],
+    "classroom": {
+    }
+  },
+  {
+    "id": 918,
+    "name": "josue",
+    "age": 12,
+    "parent_permission": true,
+    "rentals": [
+
+    ],
+    "classroom": {
+    }
+  },
+  {
+    "id": 160,
+    "name": "it",
+    "age": 12,
+    "parent_permission": true,
+    "rentals": [
+
+    ],
+    "specialization": "quq"
+  },
+  {
+    "id": 983,
+    "name": "qoq",
+    "age": 12,
+    "parent_permission": true,
+    "rentals": [
+
+    ],
+    "classroom": {
+    }
+  },
+  {
+    "id": 486,
+    "name": "IT",
+    "age": 12,
+    "parent_permission": true,
+    "rentals": [
+
+    ],
+    "specialization": "dhdh"
+  },
+  {
+    "id": 692,
+    "name": "cbcb",
+    "age": 129,
+    "parent_permission": true,
+    "rentals": [
+
+    ],
+    "classroom": {
+    }
+  },
+  {
+    "id": 85,
+    "name": "it",
+    "age": 12,
+    "parent_permission": true,
+    "rentals": [
+
+    ],
+    "specialization": "xvxv"
+  }
+]
