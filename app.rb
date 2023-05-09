@@ -5,18 +5,20 @@ require_relative 'classroom'
 require_relative 'nameable'
 require_relative 'book'
 require_relative 'rental'
+require_relative './data/data_preserve'
 
 class App
   attr_accessor :people, :rentals, :books
 
   def initialize
-    @people = []
-    @books = []
-    @rentals = []
+    @people = read_data('./data/people.json')
+    @books = read_data('./data/books.json')
+    @rentals = read_data('./data/rentals.json')
   end
 
   # Create book list
   def book_list
+    @book = read_data('./data/books.json')
     puts 'There are no books in the list' if @books.empty?
     @books.each_with_index do |book, index|
       puts "#{index} - Title: #{book.title.capitalize}, Author: #{book.author.capitalize}"
@@ -25,6 +27,7 @@ class App
 
   # Create people list
   def people_list
+    @people = read_data('./data/people.json')
     puts 'There are no people in the list' if @people.empty?
     @people.each_with_index do |person, index|
       puts "#{index} - [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
@@ -54,6 +57,7 @@ class App
     parent_permission = gets.chomp.upcase == 'Y'
 
     @people.push Student.new(age, parent_permission, name)
+    write_data(@people, './data/people.json')
     puts 'Student created successfully'
   end
 
@@ -63,6 +67,7 @@ class App
     specialization = gets.chomp
 
     @people.push Teacher.new(name, age, specialization)
+    write_data(@people, './data/people.json')
     puts 'Teacher created successfully'
   end
 
@@ -74,6 +79,7 @@ class App
     author = gets.chomp
 
     @books.push Book.new(title, author)
+    write_data(@books, './data/books.json')
     puts 'Book created successfully'
   end
 
@@ -98,11 +104,13 @@ class App
     puts 'Enter a date as (YYYY-MM-DD): '
     date = gets.chomp
     @rentals.push Rental.new(date, rented_book, renter)
+    write_data(@rentals, './data/rentals.json')
     puts 'Rental created successfully'
   end
 
   # Check rental list
   def rental_list
+    @rentals = read_data('./data/rentals.json') || []
     people_list
     puts 'Enter ID of person: '
     renter_id = gets.chomp.to_i
