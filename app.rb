@@ -10,11 +10,6 @@ require_relative './data/data_preserve'
 class App
   attr_accessor :people, :rentals, :books
 
-  def initialize
-    @people = read_data('./data/people.json')
-    @books = read_data('./data/books.json')
-    @rentals = read_data('./data/rentals.json')
-  end
 
   # Create book list
   def book_list
