@@ -1,12 +1,12 @@
 require './capitalize_decorator'
 require './person'
 
-describe capitalize_decorator do
+describe CapitalizeDecorator do
   context 'Capitalize Decorator' do
-    it 'capitalize the first name' do
-      person = Person.new(90, 'Obed')
+    it 'capitalizes the first name' do
+      person = Person.new( age:24, name:'josue')
       capitalize_person = CapitalizeDecorator.new(person).correct_name
-      expect(capitalize_person).to eq 'Obed'
+      expect(capitalize_person).to eq 'Josue'
     end
   end
 end
