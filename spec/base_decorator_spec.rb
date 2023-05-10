@@ -1,11 +1,11 @@
-require './decorator'
+require './base_decorator'
 require './nameable'
 
 describe Decorator do
   context 'Creating decorator test methods' do
-    decorator = Decorator.new('Obed Bamfo')
-    it 'sets decorator nameable as Obed Bamfo' do
-      expect(decorator.nameable).to eql 'Obed Bamfo'
+    decorator = Decorator.new('Soha Bar')
+    it 'sets decorator nameable as Soha Bar' do
+      expect(decorator.nameable).to eql 'Soha Bar'
     end
   end
-end
+end  
