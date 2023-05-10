@@ -5,8 +5,8 @@ describe Rental do
   context 'Tracking rental information' do
     book_one = Book.new('MATH', 'Tolkien')
     book_two = Book.new('IT', 'Grange')
-    person_one = Person.new(100, 'Josue')
-    person_two = Person.new(300, 'Obed')
+    person_one = Person.new(age: 100, name: 'Josue')
+    person_two = Person.new(age: 300, name: 'Obed')
     rental_one = Rental.new('2020-20-20', book_one, person_one)
     rental_two = Rental.new('2000-02-02', book_two, person_two)
     rental_three = Rental.new('1980-08-08', book_two, person_one)
@@ -23,7 +23,7 @@ describe Rental do
 
     it 'returns a hash representation of the rental' do
       book = Book.new('MATH', 'Tolkien')
-      person = Person.new(505, 'Josue')
+      person = Person.new(age: 505, name: 'Josue')
       rental = Rental.new('2020-02-02', book, person)
 
       expected_hash = {

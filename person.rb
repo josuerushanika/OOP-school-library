@@ -1,7 +1,5 @@
 require_relative 'nameable'
 require_relative 'rental'
-require_relative 'base_decorator'
-require_relative 'capitalize_decorator'
 
 class Person < Nameable
   attr_reader :id
@@ -35,3 +33,4 @@ class Person < Nameable
     @age >= 18
   end
 end
+
