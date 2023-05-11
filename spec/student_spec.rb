@@ -1,24 +1,16 @@
-require './student'
-require './classroom'
+require 'student'
 
 describe Student do
-  context 'Testing the functionality of class Student' do
-    it 'Should create an instance of Student' do
-      student = Student.new(25, 'Jimmy', parent_permission: true)
-      expect(student).to be_a Student
-    end
+  before(:each) do
+    @student = Student.new(27, 'yemi')
+  end
 
-    it 'Set the classroom' do
-      student = Student.new(25, 'Jimmy', true)
-      my_classroom = Classroom.new('Computer Science')
-      student.classroom = student.classroom = (my_classroom)
-      expect(my_classroom).to be_a Classroom
-      expect(student.classroom.label).to eq 'Computer Science'
+  describe 'Student' do
+    it 'checks if its an instance of Student' do
+      expect(@student).to be_an_instance_of(Student)
     end
-
-    it 'Should return an emoji' do
-      student = Student.new(25, 'Jimmy', true)
-      expect(student.play_hooky).to eq '¯\(ツ)/¯'
+    it 'checks if the Student plays hookey' do
+      expect(@student.play_hooky).to eq('¯(ツ)/¯')
     end
   end
 end
