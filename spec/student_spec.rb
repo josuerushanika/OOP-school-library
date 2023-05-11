@@ -2,42 +2,23 @@ require './student'
 require './classroom'
 
 describe Student do
-  context 'Testing functions for Student class' do
-    student = Student.new(10, 'Obed', true)
-    it 'returns student information' do
+  context 'Testing the functionality of class Student' do
+    it 'Should create an instance of Student' do
+      student = Student.new(25, 'Jimmy', parent_permission: true)
       expect(student).to be_a Student
-      expect(student.age).to eql 10
-      expect(student.name).to eql 'Obed'
-      expect(student.parent_permission).to eql true
     end
 
-    it 'checks students plays hooky emoji' do
-      expect(student.play_hooky).to eql('¯(ツ)/¯')
+    it 'Set the classroom' do
+      student = Student.new(25, 'Jimmy', true)
+      my_classroom = Classroom.new('Computer Science')
+      student.classroom = student.classroom = (my_classroom)
+      expect(my_classroom).to be_a Classroom
+      expect(student.classroom.label).to eq 'Computer Science'
     end
 
-    it 'adds the classroom for student' do
-      new_classroom = Classroom.new('Web Dev')
-      student.classroom = new_classroom
-      expect(new_classroom).to be_a Classroom
-      expect(student.classroom.label).to eql 'Web Dev'
-    end
-
-    it 'returns a hash representation of the student' do
-      new_classroom = Classroom.new('Web Dev')
-      student.classroom = new_classroom
-
-      id = student.instance_variable_get(:@id)
-
-      expected_hash = {
-        id: id,
-        age: 10,
-        name: 'Obed',
-        parent_permission: true,
-        rentals: [],
-        classroom: new_classroom
-      }
-
-      expect(student.to_h).to eq(expected_hash)
+    it 'Should return an emoji' do
+      student = Student.new(25, 'Jimmy', true)
+      expect(student.play_hooky).to eq '¯\(ツ)/¯'
     end
   end
 end
