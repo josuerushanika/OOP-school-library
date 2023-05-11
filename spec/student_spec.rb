@@ -1,16 +1,17 @@
-require 'student'
+require './student'
 
 describe Student do
-  before(:each) do
-    @student = Student.new(27, 'yemi')
-  end
-
-  describe 'Student' do
+  describe '#initialize' do
     it 'checks if its an instance of Student' do
+      @student = Student.new(age: 27, name: 'josue')
       expect(@student).to be_an_instance_of(Student)
     end
+  end
+
+  describe '#play_hooky' do
     it 'checks if the Student plays hookey' do
-      expect(@student.play_hooky).to eq('¯(ツ)/¯')
+      @student = Student.new(age: 27, name: 'josue')
+      expect(@student.play_hooky).to eq('¯\(ツ)/¯')
     end
   end
 end
