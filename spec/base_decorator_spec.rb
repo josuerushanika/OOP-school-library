@@ -8,4 +8,4 @@ describe Decorator do
       expect(decorator.nameable).to eql 'Soha Bar'
     end
   end
-end  
+end
