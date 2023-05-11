@@ -10,7 +10,7 @@ describe Classroom do
     end
 
     it 'adds students to classroom' do
-      new_student = Student.new('Josue', 24, true)
+      new_student = Student.new( 24,'Josue',parent_permission: true)
       classroom.students.push(new_student)
       expect(classroom.students).to include(new_student)
       expect(classroom.students.length).to eql 1

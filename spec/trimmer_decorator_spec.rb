@@ -1,14 +1,12 @@
-require './nameable'
-require './person'
-require './trimmer_decorator'
+require_relative '../student'
+require_relative '../trimmer_decorator'
 
-describe TrimmerDecorator do
+describe Trimmer do
   context 'Create trimmer test functions' do
     it 'should trim the name with more than 10 characters' do
-      person = Person.new(23, 'josuerushanika')
-      trimmed_name = TrimmerDecorator.new(person).correct_name
+      person = Student.new(23, 'josuerushanika')
+      trimmed_name = Trimmer.new(person).correct_name
       expect(trimmed_name).to eql 'josuerusha'
-      expect(trimmed_name.length).to be <= 10
     end
   end
 end

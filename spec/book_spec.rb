@@ -13,7 +13,7 @@ describe Book do
 
     it 'adds a book to rentals' do
       book = Book.new('Obed', 'IT')
-      student = Student.new(7, 'Max', true)
+      student = Student.new(7, 'Max', parent_permission:true)
       rental_book = book.add_rental(student, '2022-02-02')
       expect(rental_book).to be_a Rental
     end

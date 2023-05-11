@@ -22,7 +22,9 @@ describe Teacher do
         age: 23,
         name: 'Josue',
         specialization: 'Soft',
+        parent_permission: true,
         rentals: []
+        
       }
 
       expect(teacher.to_h).to eq(expected_hash)
